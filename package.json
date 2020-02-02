@@ -1,0 +1,32 @@
+{
+  "name": "test-arango",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/index.js"
+  },
+  "author": "vmgabriel",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "envalid": "^6.0.1",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "helmet": "^3.21.2",
+    "http-status-codes": "^1.4.0",
+    "https": "^1.0.0",
+    "joi": "^14.3.1",
+    "orange": "0.0.1",
+    "orango": "^1.0.0-beta-1.1",
+    "request": "^2.88.0",
+    "typescript": "^3.7.5"
+  },
+  "devDependencies": {
+    "@types/node": "^13.7.0",
+    "ts-node": "^8.6.2"
+  }
+}
