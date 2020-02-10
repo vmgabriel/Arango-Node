@@ -54,7 +54,7 @@ class Server {
     // Core Options
     this.corsOptions = {
       // credentials: true,
-      methods: [ "POST", "PUT", "PATCH", "DELETE" ],
+      methods: ["GET", "POST", "PUT", "PATCH", "DELETE" ],
       origin: true
     };
 

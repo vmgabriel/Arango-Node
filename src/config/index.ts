@@ -8,6 +8,8 @@ import * as dotenv from "dotenv";
 // Enable configuration of dotenv
 dotenv.config();
 
+
+
 /**
  * Configuration of environment for server
  */
@@ -25,5 +27,3 @@ const config = {
 };
 
 export default config;
-
-
