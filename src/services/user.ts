@@ -1,18 +1,19 @@
 "use strict";
 
-const orango = require('orango');
-
 // Interfaces
 import { IUser } from '../interfaces/user';
 
 // Models
 import userModel from '../models/user';
 
+/** Class of User Service based in connection with User */
 export class UserService {
 
-  constructor() {
-  }
-
+  /**
+   * Create a User in DataBase
+   * @param user User to Saved In Database
+   * @return {Promise<Partial<IUser>>} Data of User in Database
+   */
   public create(user: Partial<IUser>): Promise<Partial<IUser>> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -24,43 +25,38 @@ export class UserService {
         } else {
           reject(new Error("It Can't save object"));
         }
-      } catch(err) {
+      } catch (err) {
         reject(err);
       }
     });
   }
 
-  public find(id: String): Promise<IUser> {
+  /**
+   * Find User By Id
+   * @param id {string} Id of User
+   * @return {Promise<IUser>} Data of User
+   */
+  public findById(id: string): Promise<IUser> {
     return new Promise(async (resolve, reject) => {
       try {
-        const user = await userModel.find().where({_key:id});
-        if (user){
+        const user = await userModel.find().where({ _key: id });
+        if (user) {
           resolve(user);
         } else {
           reject(new Error("User not found"));
         }
       } catch (err) {
-        reject(err)
-      }
-    });
-  }
-
-  public findAllUsers(): Promise<Array<IUser>> {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let result = await userModel.find();
-        if (result){
-          resolve(result);
-        } else {
-          reject (new Error("Users not found"));
-        }
-      } catch (err) {
         reject(err);
       }
     });
   }
 
-  public update(id: String, user: Partial<IUser>): Promise<Partial<IUser>> {
+  /**
+   * Update Data of User
+   * @param id {string} Id Of User
+   * @param user {Partial<IUser>} Data of User to Updated
+   */
+  public update(id: string, user: Partial<IUser>): Promise<Partial<IUser>> {
     return new Promise(async (resolve, reject) => {
       try {
         let result = await userModel.update(user).where({_key: id, isValid: true}).return();
@@ -75,7 +71,12 @@ export class UserService {
     });
   }
 
-  public delete(id: String): Promise<Partial<IUser>> {
+  /**
+   * Delete User By Id
+   * @param id {string}
+   * @return {Promise<Partial<IUser>>} User Deleted
+   */
+  public delete(id: string): Promise<Partial<IUser>> {
     return new Promise( async (resolve, reject) => {
         try {
           let result = await userModel.update({isValid: false}).where({_key: id}).return();

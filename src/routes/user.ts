@@ -13,7 +13,6 @@ import { IUser } from '../interfaces/user';
 
 /**
  * Route for User Routes
- *
  **/
 export class UserRoutes {
   public router: express.Router;
@@ -38,7 +37,6 @@ export class UserRoutes {
   public config(): void {
     this.create();
     this.findUserById();
-    this.findAllUsers();
     this.updateUser();
     this.deleteUser();
     // End config function
@@ -55,13 +53,14 @@ export class UserRoutes {
           const model : Partial<IUser> = req.body;
           const data = await this.service.create(model);
           res.status(201).send({ message: 'Done Correctly', code: 201, data });
-        } catch(err) {
+        } catch (err) {
           next(err);
         }
       }
     );
   }
 
+  /** Find User By Id Route */
   public findUserById() {
     this.router.get(
       "/profile/:id",
@@ -69,9 +68,9 @@ export class UserRoutes {
         try {
           const userId = req.params;
           if (userId) {
-            let data = await this.service.find(userId.id);
+            let data = await this.service.findById(userId.id);
             res.status(200).send(data);
-          }else{
+          } else {
             next({ code: 400, error: "Datos invalidos" });
           }
         } catch (err) {
@@ -81,21 +80,8 @@ export class UserRoutes {
     );
  }
 
-  public findAllUsers(){
-    this.router.get(
-      "/list",
-       async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-        try {
-          let data = await this.service.findAllUsers();
-          res.status(200).send(data);
-        } catch (err) {
-          next(err);
-        }
-      }
-    );
-  }
-
-  public updateUser(){
+  /** Update User By Id */
+  public updateUser() {
     this.router.put(
       "/:id",
       async (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -105,7 +91,7 @@ export class UserRoutes {
             const modelUpdated : Partial<IUser> = req.body;
             let data = await this.service.update(userId.id, modelUpdated);
             res.status(200).send(data);
-          }else{
+          } else {
             next({ code: 400, error: "Datos invalidos" });
           }
         } catch (err) {
@@ -115,7 +101,8 @@ export class UserRoutes {
     );
   }
 
-  public deleteUser(){
+  /** Delete User By Id  */
+  public deleteUser() {
     this.router.put(
       "/remove/:id",
       async (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -124,7 +111,7 @@ export class UserRoutes {
           if (userId) {
             let data = await this.service.delete(userId.id);
             res.status(200).send(data);
-          }else{
+          } else {
             next({ code: 400, error: "Datos invalidos" });
           }
         } catch (err) {

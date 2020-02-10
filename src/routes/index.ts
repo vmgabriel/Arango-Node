@@ -7,7 +7,6 @@ import * as express from "express";
 
 /**
  * Route base
- *
  **/
 export class IndexRoutes {
   public router: express.Router;

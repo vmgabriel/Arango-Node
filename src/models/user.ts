@@ -9,8 +9,8 @@ import config from "../config";
 // Libraries
 const orango = require('orango');
 const db = orango.get(config.dbName);
-const Joi = require('joi');
 
+/** Schema Model of Orango in this case for User */
 let schema = new orango.Schema({
   name: { type: String, min: 3, max: 50 } ,
   lastName: { type: String, min: 3, max: 100 },
@@ -18,7 +18,7 @@ let schema = new orango.Schema({
   cellPhone: { type: String, min: 3, max: 50 },
   alias: { type: String, min: 2, max: 100 },
   dateBorn: Date,
-  country: { type:String, min: 2, max: 400 },
+  country: { type: String, min: 2, max: 400 },
   urlPhoto: String,
   isValid: { type: Boolean, default: true },
   createdAt: { type: Date, default: Date.now },

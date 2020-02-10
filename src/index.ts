@@ -112,6 +112,10 @@ class Server {
     this.app.use(clientErrorHandler);
   }
 
+  /**
+   * Execute Database
+   * @param isHttps
+   */
   public async initDb(isHttps: boolean) {
     try {
       const db = await connect();

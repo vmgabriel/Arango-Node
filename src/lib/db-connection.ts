@@ -12,31 +12,20 @@
 "use strict";
 
 // Libraries
-//import orango from 'orango';
 const orango = require('orango');
 
 // Constants
 import config from "../config";
 
 // DB
-// const { EVENTS } = orango.consts;
 const db = orango.get(config.dbName);
-
-// we are connected, but orango has not initialized the models
-// db.events.once(EVENTS.CONNECTED, conn => {
-//   console.log('Connected to ArangoDB:', conn.url + '/' + conn.name);
-// });
-
-// // everything is initialized and we are ready to go
-// db.events.once(EVENTS.READY, () => {
-//   console.log('Orango is ready!');
-// });
 
 let instance: any = null;
 let isDisconnecting = false;
 
 /**
  * Connect to mongo client
+ * @return <Promise<connection>> Connection of Orange
  */
 export const connect = () => {
   return new Promise(async (resolve, reject) => {
@@ -52,6 +41,7 @@ export const connect = () => {
 
 /**
  * Disconnect from mongo client
+ * @return <Promise<connection>> Output connection of Orange
  */
 export const disconnect = (): Promise<any> => {
   return new Promise<any>(async (resolve, reject) => {
